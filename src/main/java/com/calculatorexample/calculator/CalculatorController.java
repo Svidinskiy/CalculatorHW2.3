@@ -21,7 +21,7 @@ public class CalculatorController {
 
     @GetMapping("/plus")
     public String plus(@RequestParam(value = "num1") Double number1, @RequestParam(value = "num2") Double number2) {
-        Double result = calculatorService.plus(number1, number2);
+        double result = calculatorService.plus(number1, number2);
         return number1 + " + " + number2 + " = " + result;
     }
 
@@ -39,14 +39,10 @@ public class CalculatorController {
 
     @GetMapping("/divide")
     public String divide(@RequestParam("num1") Double number1, @RequestParam("num2") Double number2) {
-        try {
-            double result = calculatorService.divide(number1, number2);
-            return number1 + " / " + number2 + " = " + result;
-        }
-        catch (ArithmeticException e) {
-            return "Ошибка: " + e.getMessage();
-        }
+        double result = calculatorService.divide(number1, number2);
+        return number1 + " / " + number2 + " = " + result;
     }
+
     @ExceptionHandler(MissingServletRequestParameterException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleMissingParams(MissingServletRequestParameterException ex) {
